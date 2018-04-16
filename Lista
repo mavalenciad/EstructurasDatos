@@ -1,0 +1,114 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package estructuras;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
+
+public class Lista {
+    Nodo head = null;
+    public boolean isEmpty(){
+        return head==null? true:false;//Funcion para sber si la lista esta vacia;
+    }
+    public void printList(){//imprime la lista
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        Nodo temp = head ; 
+        try {
+            bw.write("grades: \n");
+            while(temp!=null){
+              bw.write(temp.toString());
+              temp = temp.next;
+            }
+            bw.flush();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+            
+        }
+    }
+    public void insertAtBegin(Nodo newNode){
+      newNode.next = head;//el nuevo nodo apunta cabeza
+      head = newNode;//la cabeza ahora es igual al nuevo nodo
+    
+    }
+    public void insertAtEnd(Nodo newNodo){
+        if(isEmpty()){
+            head= newNodo;
+        }
+        else
+        {
+            Nodo temp = head;
+            while(temp.next!=null){
+                temp=temp.next;
+            }
+            temp.next=newNodo;
+        }
+    }
+    public void insertAtindice(Nodo newNodo, int index){
+        Nodo temp = head;
+        for (int i = 0; i < index-1; i++) {
+             temp=temp.next;
+             newNodo.next=temp.next;
+             temp.next=newNodo;
+        }
+        
+    }
+    public void deleteAtBegin(){
+        Nodo temp = head;
+        head = head.next;
+        temp= null;
+        System.gc();
+    }
+    public void deleteAtEnd(){
+        Nodo temp = head;
+        while(temp.next.next!=null){
+           temp = temp.next; 
+        }
+        temp.next = null;
+        System.gc();
+    }
+    public void deleteAtMid(int NumeroDonde){//NO SIRVE
+        Nodo temp=head;
+        if(NumeroDonde!=1)
+        {
+            for (int i = 1; i <NumeroDonde-1; i++) 
+            {
+            temp = temp.next;
+            }
+            temp.next=temp.next.next;
+            temp = temp.next;
+            temp=null;
+            System.gc();
+        }
+        else
+        {
+            deleteAtBegin();
+        }
+    }
+    public void push (Nodo NewNodo){
+        NewNodo.next = head;
+        head = NewNodo;
+        
+    }
+    public void pop(){
+        
+    }
+    public static void main (String[] args){
+        Lista grades= new Lista();
+        grades.insertAtBegin(new Nodo("Parcial 1 ",3.5));        
+        grades.insertAtBegin(new Nodo("quiz 1 ", 3.7));
+        grades.insertAtEnd(new Nodo("quiz 3 ",4.5));
+        grades.deleteAtMid(3);
+                
+        grades.printList();
+        
+        
+        
+    
+}
+}
