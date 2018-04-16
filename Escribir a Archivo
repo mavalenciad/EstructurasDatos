@@ -1,0 +1,48 @@
+public class Try {
+    
+
+    public static String cadena (int cantidad){
+        
+          String [] bases = {"A","G","W","C"};
+          String text =  new String(); 
+	  
+	  for(int i=0;i<cantidad;i++) {
+                int numero = (int) (Math.random()*4);
+		text = text+bases[numero];  
+	  }
+          return text;
+    }
+    public static String Chromo(){
+     int numero = (int) (Math.random()*23);
+     numero ++;
+     return "chrom" + " " + numero;
+    
+    }
+    
+    
+    public static void main(String[] args) {
+        
+        try
+        {
+        File text = new File("C:\\Users\\Usuario\\Documents\\text1.txt");
+        BufferedWriter bw = new BufferedWriter(new FileWriter(text));
+        int datasize = 100;
+        for(int i=0;i<datasize;i++){
+        int tamano = (int) (Math.random()*50); 
+        int inicio = (int)(Math.random()*1000);
+        int fin= inicio + tamano;
+        bw.write(cadena(tamano)+","+Chromo()+","+inicio+","+fin+"\n");        
+        }
+        bw.flush();
+        }
+        catch(IOException e){
+        }
+       
+          
+      
+	  
+
+ 
+    
+}
+}
