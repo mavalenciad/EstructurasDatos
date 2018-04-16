@@ -1,0 +1,30 @@
+public class Read {
+
+    public static void main(String[] args) {
+        try
+        {
+         
+         BufferedReader br = new BufferedReader( new FileReader("C:\\Users\\Usuario\\Documents\\text1.txt"));
+         String aux;
+         while ((aux = br.readLine()) != null) 
+         {
+             String aux1[];
+             aux1 = aux.split(",");
+             String bases = aux1[0];
+             String chroma=aux1[1];
+             int inicioc= Integer.parseInt(aux1[2]);
+             int finalc = Integer.parseInt(aux1[3]);
+             Cadena Caux = new Cadena(bases,chroma,inicioc,finalc);
+             Caux = Caux.next;		
+         }
+
+         
+         
+        }
+        catch(IOException e)
+        {
+        }
+        // TODO code application logic here
+    }
+    
+}
