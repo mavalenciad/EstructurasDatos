@@ -1,0 +1,84 @@
+package estructuradatos;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.lang.Integer;
+/**
+ *
+ * @author Estudiante
+ */
+public class EstructuraDatos {
+    Lista sequence = new Lista();
+    int max_ocurrences=Integer,MIN_VALUE;//menor valor entero que tien java
+    String motif_winner = "";
+    public void compareMotif(String motif_candidata){
+        int counter = contarOcurrencia(motif_candidata);
+        if(counter>max_ocurrences){
+            max_ocurrences=counter;
+        }
+    }
+    public int contarOcurrencia(String motif_candidata){
+      int counter = 0;
+      Nodo temp = sequence.head;
+      String gen;
+      while (temp!=null){
+          gen=temp.bases;
+          for (int i = 0; i <=(gen.length()-motif_candidata.length()); i++) 
+          {
+              if (gen.substring(i,i+motif_candidata.length()).equals(motif_candidata)) 
+              {
+                  counter +=1;
+                  i+= motif_candidata.length()-1;
+                  
+              }
+   
+          }
+          temp=temp.next;
+      }
+      return counter;
+    }
+    public void CombinationGenerator(String subsequence, int size){
+        if (size == 1) {
+            compareMotif(subsequence+"A");
+            compareMotif(subsequence+"G");
+            compareMotif(subsequence+"C");
+            compareMotif(subsequence+"T");
+                                    
+        }
+        else  
+        {
+            CombinationGenerator(subsequence+"A",size-1);
+            CombinationGenerator(subsequence+"G",size-1);
+            CombinationGenerator(subsequence+"C",size-1);
+            CombinationGenerator(subsequence+"T",size-1);
+        }
+    }
+    public void countChromosome() throws IOException{
+        int[] chromosomes= new int[23];
+        String cromosoma;
+        int index;
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        Nodo temp = sequence.head;
+        while(temp!=null)
+        {
+            if (temp.bases.contains(motif_winner)) {
+                cromosoma = temp.chromosoma;
+                cromosoma = cromosoma.replace("chr","");
+                index= Integer.parseInt(cromosoma)-1;
+                chromosomes[index]+=1;
+                        
+            }
+            
+            temp=temp.next;
+        }
+        for (int i = 0; i < 23; i++) {
+            bw.write("Chromosome "+(i+1)+" :"+chromosomes[i]+"\n");
+            bw.flush();
+        }
+    }
+    
+    public static void main(String[] args) {
+        
+    }
+    
+}
