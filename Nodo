@@ -1,0 +1,29 @@
+package estructurasdatos;
+
+import javafx.scene.Node;
+
+
+public class Nodo {
+    //grade= Nombre de donde es la nota grade=valor de la nota
+    String grade;
+    double value;
+    Nodo next = null;
+    
+    public Nodo() {}
+    public Nodo(String grade, double value){
+    this.grade=grade;
+    this.value=value;
+    }
+    public Nodo clone(){
+    
+    Nodo temp= new Nodo(this.grade,this.value);
+    return temp;
+    }    
+    @Override
+    public String toString(){
+        return "Grade: "+this.grade+"\t"+
+                "Value: "+this.value+"\n";
+    }        
+         
+    
+}
