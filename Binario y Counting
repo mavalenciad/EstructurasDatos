@@ -1,0 +1,66 @@
+package counting.sort;
+
+import java.util.Arrays;
+
+/**
+ *
+ * @author Estudiante
+ */
+public class CountingSort {
+
+   public static int mayor(int [] arreglo){
+       int max = Integer.MIN_VALUE; 
+       int comparador = 0; 
+       for (int i = 0; i < arreglo.length; i++) {
+           if (arreglo[i]>max) {
+               max=arreglo[i];
+           }
+       }
+       return max;
+   }
+   public static int[] vacio(int[] arreglo){
+       for (int i = 0; i <arreglo.length; i++) {
+           arreglo[i]= 0 ; 
+       }
+       return arreglo;
+   }
+   public static int binario(int buscado, int []ordenado){
+       int tam = ordenado.length; 
+       int mitadPasado = 0 ; 
+       while (mitadPasado<=tam){
+           int mitadActual = mitadPasado + (tam/2);
+           if (mitadActual == buscado) {
+               return mitadActual;
+           }
+           if(mitadActual<buscado){
+               mitadPasado = mitadActual+1;
+           }
+           else {
+               tam = mitadActual - 1 ;
+           }        
+       }
+       return -1;
+   }
+    public static void main(String[] args) {
+        int[] arreglo = {1,2,3,2,1,6,2,8,3,6,6,4,3,9,0,0};
+        int max = mayor(arreglo);
+        int index = 0 ; 
+        int[]escalera = new int [max+1];
+        escalera = vacio(escalera);
+        for (int i = 0; i <arreglo.length ; i++) {
+            escalera[arreglo[i]]+= 1;
+        }
+        for (int i = 0; i < escalera.length; i++) {
+            for (int j = 0; j < escalera[i]; j++) {
+                arreglo[index]= i ;
+                index +=1;
+            }
+        }
+        
+        System.out.print(Arrays.toString(arreglo));
+        if(binario(8,arreglo) != -1){
+            System.out.print("El numero esta en el indice: "+binario(8,arreglo);
+        }
+    }
+    
+}
